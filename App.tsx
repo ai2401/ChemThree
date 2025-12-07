@@ -214,6 +214,7 @@ const App: React.FC = () => {
   }
 
   const activeInfo = getSceneDescription();
+  const isDemo = currentScene === SceneType.DEMO;
 
   // Top 5 scenes for default bar
   const defaultScenes = SCENES.slice(0, 5);
@@ -318,9 +319,10 @@ const App: React.FC = () => {
           <OrbitControls 
             minPolarAngle={Math.PI / 4} 
             maxPolarAngle={Math.PI / 1.5}
-            autoRotate
+            autoRotate={!isDemo}
             autoRotateSpeed={0.5}
             dampingFactor={0.05}
+            enableDamping={!isDemo}
           />
         </Canvas>
       </div>

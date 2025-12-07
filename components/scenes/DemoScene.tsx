@@ -1,7 +1,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { Html } from '@react-three/drei';
-import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { MoleculeStructure } from '../../types';
 import { MoleculeRenderer } from '../MoleculeRenderer';
@@ -109,15 +108,6 @@ export const DemoScene: React.FC = () => {
     return () => clearTimeout(timer);
   }, [code]);
 
-  // Smoothly shift the model to the right when the editor is open
-  useFrame((state, delta) => {
-    if (groupRef.current) {
-        // Shift 3D model to the right so it's not hidden by the UI
-        const targetX = isOpen ? 2.5 : 0;
-        groupRef.current.position.x = THREE.MathUtils.lerp(groupRef.current.position.x, targetX, delta * 4);
-    }
-  });
-
   // Helper to prevent 3D controls from hijacking events inside the UI
   const stopPropagation = (e: React.SyntheticEvent) => {
     e.stopPropagation();
@@ -126,7 +116,7 @@ export const DemoScene: React.FC = () => {
   return (
     <>
       {/* 3D Content Container */}
-      <group ref={groupRef}>
+      <group ref={groupRef} position={[isOpen ? 2.5 : 0, 0, 0]}>
         {data ? (
             <MoleculeRenderer data={data} scale={1.2} />
         ) : (
