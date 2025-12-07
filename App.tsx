@@ -14,6 +14,7 @@ import { CaffeineScene } from './components/scenes/CaffeineScene';
 import { GrapheneScene } from './components/scenes/GrapheneScene';
 import { BuckyballScene } from './components/scenes/BuckyballScene';
 import { RBCScene } from './components/scenes/RBCScene';
+import { DemoScene } from './components/scenes/DemoScene';
 
 // Icons
 const BeakerIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4.5 3h15"/><path d="M6 3v16a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V3"/><path d="M6 14h12"/></svg>;
@@ -32,6 +33,7 @@ const BoxIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height=
 const SunIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2"/><path d="M12 21v2"/><path d="M4.22 4.22l1.42 1.42"/><path d="M18.36 18.36l1.42 1.42"/><path d="M1 12h2"/><path d="M21 12h2"/><path d="M4.22 19.78l1.42-1.42"/><path d="M18.36 5.64l1.42-1.42"/></svg>;
 const ImageIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>;
 const GithubIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 1.2 6.44 1.54a3.37 3.37 0 0 0-.94 2.61v4.25"/></svg>;
+const CodeIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>;
 
 const SCENES: SceneConfig[] = [
   { 
@@ -89,6 +91,13 @@ const SCENES: SceneConfig[] = [
     label_cn: '咖啡因',
     description: '1,3,7-Trimethylxanthine. Stimulating alkaloid.',
     description_cn: '1,3,7-三甲基黄嘌呤。一种兴奋性生物碱。'
+  },
+  { 
+    id: SceneType.DEMO, 
+    label: 'AI Lab',
+    label_cn: 'AI 实验室',
+    description: 'Interactive Sandbox. Generate custom structures via AI and visualize them in real-time.',
+    description_cn: '交互式沙箱。利用 AI 生成代码，实时构建并可视化任何自定义的分子结构。'
   }
 ];
 
@@ -102,6 +111,7 @@ const getSceneIcon = (id: SceneType) => {
     case SceneType.DNA_HELIX: return <DnaIcon />;
     case SceneType.RBC: return <DropletIcon />;
     case SceneType.CAFFEINE: return <CoffeeIcon />;
+    case SceneType.DEMO: return <CodeIcon />;
     default: return <BeakerIcon />;
   }
 };
@@ -146,7 +156,7 @@ const EnvController: React.FC<{ mode: EnvMode }> = ({ mode }) => {
     // Use RoomEnvironment (Synthetic Procedural Environment)
     const pmremGenerator = new THREE.PMREMGenerator(gl);
     pmremGenerator.compileEquirectangularShader();
-    const roomEnv = new RoomEnvironment();
+    const roomEnv = new (RoomEnvironment as any)();
     const renderTarget = pmremGenerator.fromScene(roomEnv);
     scene.environment = renderTarget.texture;
 
@@ -190,6 +200,7 @@ const App: React.FC = () => {
       case SceneType.DNA_HELIX: return <DNAScene />;
       case SceneType.CAFFEINE: return <CaffeineScene />;
       case SceneType.RBC: return <RBCScene />;
+      case SceneType.DEMO: return <DemoScene />;
       default: return <CrystalScene />;
     }
   };

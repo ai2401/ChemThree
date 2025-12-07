@@ -30,7 +30,8 @@ export enum SceneType {
   CAFFEINE = 'CAFFEINE',
   GRAPHENE = 'GRAPHENE',
   BUCKYBALL = 'BUCKYBALL',
-  RBC = 'RBC'
+  RBC = 'RBC',
+  DEMO = 'DEMO'
 }
 
 export interface SceneConfig {
