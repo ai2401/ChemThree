@@ -1,4 +1,5 @@
 
+
 export interface AtomData {
   id: string;
   element: string;
@@ -38,37 +39,4 @@ export interface SceneConfig {
   label_cn: string;
   description: string;
   description_cn: string;
-}
-
-// Augment JSX namespace to include React Three Fiber elements
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      mesh: any;
-      group: any;
-      meshPhysicalMaterial: any;
-      cylinderGeometry: any;
-      latheGeometry: any;
-      ambientLight: any;
-      spotLight: any;
-      pointLight: any;
-      color: any;
-    }
-  }
-
-  namespace React {
-    namespace JSX {
-      interface IntrinsicElements {
-        mesh: any;
-        group: any;
-        meshPhysicalMaterial: any;
-        cylinderGeometry: any;
-        latheGeometry: any;
-        ambientLight: any;
-        spotLight: any;
-        pointLight: any;
-        color: any;
-      }
-    }
-  }
 }

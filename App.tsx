@@ -31,6 +31,7 @@ const CameraIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="16" heig
 const BoxIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>;
 const SunIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2"/><path d="M12 21v2"/><path d="M4.22 4.22l1.42 1.42"/><path d="M18.36 18.36l1.42 1.42"/><path d="M1 12h2"/><path d="M21 12h2"/><path d="M4.22 19.78l1.42-1.42"/><path d="M18.36 5.64l1.42-1.42"/></svg>;
 const ImageIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>;
+const GithubIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 1.2 6.44 1.54a3.37 3.37 0 0 0-.94 2.61v4.25"/></svg>;
 
 const SCENES: SceneConfig[] = [
   { 
@@ -329,9 +330,15 @@ const App: React.FC = () => {
           
           <div className="flex flex-col items-end gap-2">
             <div className="flex gap-2 items-center">
-               <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-full px-4 py-2 text-xs text-slate-300 font-mono hidden md:block">
-                 {t.version}
-               </div>
+               <a 
+                 href="https://github.com/ai2401/ChemThree" 
+                 target="_blank" 
+                 rel="noopener noreferrer"
+                 className="flex items-center gap-2 bg-white/5 backdrop-blur-md border border-white/10 rounded-full px-3 py-1 text-xs text-slate-300 font-sans hover:bg-white/10 transition-colors hover:text-white"
+               >
+                 <GithubIcon />
+                 <span className="hidden sm:inline">GitHub</span>
+               </a>
 
                {/* Environment Toggle */}
                <button 
@@ -379,10 +386,12 @@ const App: React.FC = () => {
         {/* Footer / Controls */}
         <div className="flex flex-col md:flex-row items-end justify-between gap-6 pointer-events-auto relative z-20">
           
-          {/* Info Card */}
-          <div className="bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl max-w-xs transition-all hover:bg-white/10">
-            <h2 className="text-2xl text-white font-serif mb-2">{activeInfo?.label}</h2>
-            <p className="text-slate-300 text-sm leading-relaxed">
+          {/* Info Card - Updated Style */}
+          <div className="max-w-md">
+            <h2 className="text-3xl md:text-4xl text-white font-serif italic mb-2 tracking-tight">
+              {activeInfo?.label}
+            </h2>
+            <p className="text-slate-400 text-sm md:text-base leading-relaxed">
               {activeInfo?.description}
             </p>
           </div>
